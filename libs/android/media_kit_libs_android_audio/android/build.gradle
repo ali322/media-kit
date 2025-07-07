@@ -49,7 +49,7 @@ android {
 
 
 task downloadDependencies(type: Exec)  {
-    
+
         def outputDir = file("$buildDir/output")
         if (outputDir.exists()) {
             outputDir.deleteDir()
@@ -58,10 +58,14 @@ task downloadDependencies(type: Exec)  {
 
         // Download all *.jar dependencies & verify their MD5 checksums.
         def filesToDownload = [
-            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-arm64-v8a.jar", "md5": "46f80b1f48ec7df4b5232b2f183ef012", "destination": file("$buildDir/v1.1.5/default-arm64-v8a.jar")],
-            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-armeabi-v7a.jar", "md5": "5655d8b66001ba374ca73e6205f62737", "destination": file("$buildDir/v1.1.5/default-armeabi-v7a.jar")],
-            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-x86_64.jar", "md5": "0775b74a81445784aed41180816e55be", "destination": file("$buildDir/v1.1.5/default-x86_64.jar")],
-            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-x86.jar", "md5": "e77160289385403425b1516f0dd692b0", "destination": file("$buildDir/v1.1.5/default-x86.jar")]
+            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.6/full-arm64-v8a.jar", "md5": "14eb0e897ef8a06559c595edb39f5377", "destination": file("$buildDir/v1.1.6/full-arm64-v8a.jar")],
+            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.6/full-armeabi-v7a.jar", "md5": "02049f35aa544f9e98eb2728e5c59f91", "destination": file("$buildDir/v1.1.6/full-armeabi-v7a.jar")],
+            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.6/full-x86_64.jar", "md5": "3d7a0894e90569646a1d431f1c03c63d", "destination": file("$buildDir/v1.1.6/full-x86_64.jar")],
+            ["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.6/full-x86.jar", "md5": "66738e4ef14a445f5e837a0acd4f578a", "destination": file("$buildDir/v1.1.6/full-x86.jar")]
+            //["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-arm64-v8a.jar", "md5": "46f80b1f48ec7df4b5232b2f183ef012", "destination": file("$buildDir/v1.1.5/default-arm64-v8a.jar")],
+            //["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-armeabi-v7a.jar", "md5": "5655d8b66001ba374ca73e6205f62737", "destination": file("$buildDir/v1.1.5/default-armeabi-v7a.jar")],
+            //["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-x86_64.jar", "md5": "0775b74a81445784aed41180816e55be", "destination": file("$buildDir/v1.1.5/default-x86_64.jar")],
+            //["url": "https://github.com/media-kit/libmpv-android-audio-build/releases/download/v1.1.5/default-x86.jar", "md5": "e77160289385403425b1516f0dd692b0", "destination": file("$buildDir/v1.1.5/default-x86.jar")]
         ]
 
         filesToDownload.each { fileInfo ->
@@ -87,7 +91,7 @@ task downloadDependencies(type: Exec)  {
                 if (calculatedMD5 != fileInfo.md5) {
                     throw new GradleException("MD5 verification failed for ${destFile}")
                 }
-               
+
             }
 
             copy {
@@ -95,7 +99,7 @@ task downloadDependencies(type: Exec)  {
                 into outputDir
             }
         }
-    
+
 }
 
 assemble.dependsOn(downloadDependencies)
