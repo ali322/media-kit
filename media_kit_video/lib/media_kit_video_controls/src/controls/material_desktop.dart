@@ -73,6 +73,9 @@ class MaterialDesktopVideoControlsThemeData {
   /// Keyboards shortcuts.
   final Map<ShortcutActivator, VoidCallback>? keyboardShortcuts;
 
+  /// Whether to draw the default top/bottom background gradients behind controls.
+  final bool showBackdropGradient;
+
   /// Whether the controls are initially visible.
   final bool visibleOnMount;
 
@@ -188,6 +191,7 @@ class MaterialDesktopVideoControlsThemeData {
     this.playAndPauseOnTap = false,
     this.modifyVolumeOnScroll = true,
     this.keyboardShortcuts,
+    this.showBackdropGradient = true,
     this.visibleOnMount = false,
     this.hideMouseOnControlsRemoval = false,
     this.padding,
@@ -239,6 +243,7 @@ class MaterialDesktopVideoControlsThemeData {
     bool? playAndPauseOnTap,
     bool? modifyVolumeOnScroll,
     Map<ShortcutActivator, VoidCallback>? keyboardShortcuts,
+    bool? showBackdropGradient,
     bool? visibleOnMount,
     bool? hideMouseOnControlsRemoval,
     Duration? controlsHoverDuration,
@@ -282,6 +287,7 @@ class MaterialDesktopVideoControlsThemeData {
       playAndPauseOnTap: playAndPauseOnTap ?? this.playAndPauseOnTap,
       modifyVolumeOnScroll: modifyVolumeOnScroll ?? this.modifyVolumeOnScroll,
       keyboardShortcuts: keyboardShortcuts ?? this.keyboardShortcuts,
+      showBackdropGradient: showBackdropGradient ?? this.showBackdropGradient,
       visibleOnMount: visibleOnMount ?? this.visibleOnMount,
       hideMouseOnControlsRemoval:
           hideMouseOnControlsRemoval ?? this.hideMouseOnControlsRemoval,
@@ -678,7 +684,8 @@ class _MaterialDesktopVideoControlsState
                             alignment: Alignment.bottomCenter,
                             children: [
                               // Top gradient.
-                              if (_theme(context).topButtonBar.isNotEmpty)
+                              if (_theme(context).showBackdropGradient &&
+                                  _theme(context).topButtonBar.isNotEmpty)
                                 Container(
                                   decoration: const BoxDecoration(
                                     gradient: LinearGradient(
@@ -696,7 +703,8 @@ class _MaterialDesktopVideoControlsState
                                   ),
                                 ),
                               // Bottom gradient.
-                              if (_theme(context).bottomButtonBar.isNotEmpty)
+                              if (_theme(context).showBackdropGradient &&
+                                  _theme(context).bottomButtonBar.isNotEmpty)
                                 Container(
                                   decoration: const BoxDecoration(
                                     gradient: LinearGradient(
